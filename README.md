@@ -1,17 +1,88 @@
-# photo_of_the_day
+# Лабораторная работа №5. Асинхронность в Dart и Flutter. Создание приложения «Фото дня»
 
-A new Flutter project.
+Приложение на Flutter, которое загружает случайные фотографии собак или пейзажа из локальных фото. Демонстрирует работу с асинхронностью (`Future`, `async`/`await`).
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Основная информация 
 
-A few resources to get you started if this is your first Flutter project:
+**ФИО:** Гвоздева В.А, Деушев Т.Т  
+**Группа:** ИСП-231  
+**Дата:** 25.05.2026
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Стек и версии
+
+- **Flutter:** 3.41.7
+- **Dart:** 3.11.5
+- **Платформа:** Web (Chrome)
+- **Пакеты:** `http`
+
+---
+
+## ## Скриншот приложения
+
+![Главный экран приложения](/img/screenshot_web.png)
+
+---
+
+## Как запустить
+
+### 1. Клонировать репозиторий
+
+```bash
+### Скопировать репозиторий
+git clone https://github.com/nika0-0-11/Flutter_lab5_Gvozdeva_Deushev
+
+### Перейти в папку проекта
+cd Flutter_lab5_Gvozdeva_Deushev/
+```
+
+### 2. Установить зависимотси
+
+```bash
+### Установить зависимости
+flutter pub get
+```
+
+### 3. Запустить приложение
+
+```bash
+### Запуск приложения
+flutter run -d chrome
+```
+
+---
+
+## Что изучили
+
+- `Future<T>` - объект, который обещает вернуть значение позже.
+- `async`/`await` - делают асинхронный код похожим на обычный синхронный.
+- `setState()` - обновляет интерфейс после завершения асинхронной операции.
+- **HTTP-запросы в Dart** - через пакет `http`.
+- **Обработка ошибок в асинхронном коде** - с помощью `try/catch`.
+
+## Ответы на вопросы
+
+### 1. Что такое Future<T>? Чем отличается от обычного возвращаемого значения?
+
+`Future<T>` - это объект, который **обещает** вернуть значение типа T в будущем. Сейчас результата нет, но он появится позже.
+
+### 2. Что делает await? Блокирует ли он весь поток выполнения?
+
+`await` приостанавливает только текущую асинхронную функцию, ожидая результат `Future`. Он не блокирует весь поток - интерфейс остается отзывчивым. 
+
+### 3. Зачем setState() вызывается дважды в _fetchPhoto()?
+
+- **Первый раз** - в начале, чтобы показать индикатор загрузки и скрыть старую картинку.
+- **Второй раз** - в конце, чтобы скрыть индикатор и показать новую картинку или ошибку.
+
+### 4. Почему кнопке передаётся _fetchPhoto без скобок, а не _fetchPhoto()?
+
+Передается ссылка на функцию, а не результат ее вызова. Со скобками `_fetchPhoto()` - функция вызвалась бы сразу при построении интерфейса, а не по нажатию кнопки.
+
+### 5. Чем Image.network() отличается от Image.asset()?
+
+- `Image.network()` - загружает карткину из интернета по URL.
+- `Image.asset()` - показывает картинку из локальной папки `assets/` проекта.
